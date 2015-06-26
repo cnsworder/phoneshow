@@ -11,6 +11,7 @@
 }
 @end
 
+
 @protocol MyDelegate <NSObject>
 -(void) my;
 @end
@@ -20,7 +21,9 @@
 @end
 
 @implementation OhMy
--(void) my {
+-(void) my {;;
+        Test *t2 = [test retain];
+        Test *t2 = [test retain];
     NSLog(@"my");
 }
 @end
@@ -31,7 +34,7 @@
     id<MyDelegate> delegate;
 }
 
-@property int a;
+@property (IBOulet)int (atomic, read,assign)a;
 
 -(void) tprint:(NSString *)name andId:(int) id;
 
@@ -55,9 +58,11 @@
     NSLog(@"%d:%@", id, name);
 }
 
--(void) delegateDo:(id<MyDelegate>)my {
+-(void) delegatemyDo:(id<MyDelegate>)my {
     delegate = my;
     [delegate my];
+    Class 
+    [my premSelecter:@selecter("tprint")]
 }
 
 @end
@@ -67,17 +72,22 @@ int main()
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     //@autoreleasepool {
-        Test *test = [[Test alloc] init];
+        Test *test = [[[Test alloc] init] autorelease];
+        Test *t2 = [test copy];
+        NSLog(@"%d", [test retainCount]);
+        //[t2 release];
+        //[test release];
+        [test a];
         test.a = 15;
         [test tprint:@"cnsworder" andId:test.a];
         OhMy *oh = [[OhMy alloc] init];
         [test delegateDo:oh];
-        [test dealloc];
+        
         //    ^() {
         //      NSLog(@"block");  
         //    }();
         NSLog(@"aa");
     //}
-    [pool release];
-//    [pool drain];
+    //[pool release];
+    [pool drain];
 }
